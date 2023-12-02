@@ -7,48 +7,64 @@ import static java.lang.Character.isDigit;
 
 public class Puzzle01 {
     public static void main(String[] args) throws FileNotFoundException {
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/slanja/IdeaProjects/AoC2023.java/src/main/java/org/puzzles/input.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/home/slanja/IdeaProjects/AoC2023.java/src/main/java/org/puzzles/inputPuzzle01.txt"))) {
             String line, replace;
             int sum = 0;
 
             while ((line = br.readLine()) != null) {
                 // replacing words with numbers
-
-
-                /*
-                one
-                two
-                three
-
-                four
-                five
-
-                six
-                seven
-
-                eight
-
-                nine
-
-                 */
+                replace = line.replace("one", "1")
+                        .replace("two", "2")
+                        .replace("three", "3")
+                        .replace("four", "4")
+                        .replace("five", "5")
+                        .replace("six", "6")
+                        .replace("seven", "7")
+                        .replace("eight", "8")
+                        .replace("nine", "9");
 
                 // checking number from start
                 char first = 0;
-                for (int f = 0; f < line.length(); f++) {
+                for (int f = 0; f < replace.length(); f++) {
                     // checking if current character is number
-                    if (isDigit(line.charAt(f))) {
+                    if (isDigit(replace.charAt(f))) {
                         // System.out.println(line.charAt(f));
-                        first = line.charAt(f);
+                        first = replace.charAt(f);
                         break;
                     }
                 }
+
+                String newString = "";
+                char letter;
+
+                for (int index = 0; index < line.length(); index++)
+                {
+                    letter = line.charAt(index); //extracts each character
+                    newString = letter + newString; //adds each character in front of the existing string
+                }
+
+                String replaceReverse;
+
+                // replacing from end
+                replaceReverse = newString.replace("eno", "1")
+                        .replace("owt", "2")
+                        .replace("eerht", "3")
+                        .replace("ruof", "4")
+                        .replace("evif", "5")
+                        .replace("xis", "6")
+                        .replace("neves", "7")
+                        .replace("thgie", "8")
+                        .replace("enin", "9");
+
+                //System.out.println(replaceReverse);
+
                 // checking number from end
                 char last = 0;
-                for (int l = line.length() - 1; l >= 0; l--) {
+                for (int l = 0; l < replaceReverse.length(); l++) {
                     // checking if current character is number
-                    if (isDigit(line.charAt(l))) {
+                    if (isDigit(replaceReverse.charAt(l))) {
                         // System.out.println(line.charAt(l));
-                        last = line.charAt(l);
+                        last = replaceReverse.charAt(l);
                         break;
                     }
                 }
