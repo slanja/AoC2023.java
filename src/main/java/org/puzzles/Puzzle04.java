@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Puzzle04 {
     public static void main(String[] args) {
-        int id = 1;
-        int num = 0, sum = 0, power = 0;
+        int match = 0;
 
         String[] split;
         try {
@@ -19,9 +18,12 @@ public class Puzzle04 {
                 split = line.split(" ");
 
                 // 10
-                String[] yours = new String[5];
+                int[] winning = new int[5];
+
                 // 25
-                String[] winning = new String[8];
+                int[] yours = new int[8];
+
+                int w = 0, y = 0;
 
                 for (int i = 0; i < split.length; i++) {
                     // removing unnecessary string, which is game and game id
@@ -29,20 +31,44 @@ public class Puzzle04 {
                         i += 2;
                     }
 
-                    else {
-                        for (int y = 0; y < yours.length; y++) {
-                            yours[y] = split[i];
+                    if (w < 5) {
+                        try {
+                            winning[w] = Integer.parseInt(split[i]);
+                        } catch (NumberFormatException e) {
+                            w--;
                         }
                     }
 
+                    else if (w > 5) {
+                        try {
+                            yours[y] = Integer.parseInt(split[i]);
+                            y++;
+                        } catch (NumberFormatException e) {
+
+                        }
+                    }
+
+                    w++;
                 }
-                for (int k = 0; k < yours.length; k++) {
-                    System.out.println(winning[k]);
-                    // if (winning)
+                int sum = 0;
+
+                for (int k = 0; k < winning.length; k++) {
+                    for (int n = 0; n < yours.length; n++) {
+                        if (winning[k] == yours[n]) {
+                            sum += 1;
+                            System.out.println(sum);
+                            System.out.println("Match: " + yours[n] + " : " + winning[k]);
+                        }
+                    }
                 }
 
-                id++;
+                match += sum ^ 2;
+                System.out.println("m: " + match);
+
             }
+            System.out.println();
+            System.out.println(match);
+
         } catch (IOException e) {
 
         }
