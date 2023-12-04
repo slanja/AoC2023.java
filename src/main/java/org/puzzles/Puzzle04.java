@@ -14,24 +14,23 @@ public class Puzzle04 {
             List<String> lines = Files.readAllLines(Paths.get("/home/slanja/IdeaProjects/AoC2023.java/src/main/java/org/puzzles/inputPuzzle04.txt"));
 
             for (String line : lines) {
-                // spliting input file one value on each row
+                // spliting input file, one value on each row
                 split = line.split(" ");
 
-                // 10
-                int[] winning = new int[5];
-
-                // 25
-                int[] yours = new int[8];
+                // setting size of arrays to size 10, 25
+                int[] winning = new int[10];
+                int[] yours = new int[25];
 
                 int w = 0, y = 0;
 
                 for (int i = 0; i < split.length; i++) {
-                    // removing unnecessary string, which is game and game id
+                    // removing unnecessary string, which is card and card id
                     if (split[i].contains("Card")) {
                         i += 2;
                     }
 
-                    if (w < 5) {
+                    // putting winning numbers to array
+                    if (w < 10) {
                         try {
                             winning[w] = Integer.parseInt(split[i]);
                         } catch (NumberFormatException e) {
@@ -39,7 +38,8 @@ public class Puzzle04 {
                         }
                     }
 
-                    else if (w > 5) {
+                    // putting your numbers to array
+                    else if (w > 10) {
                         try {
                             yours[y] = Integer.parseInt(split[i]);
                             y++;
@@ -47,27 +47,22 @@ public class Puzzle04 {
 
                         }
                     }
-
                     w++;
                 }
                 int sum = 0;
 
+                // checking if you have winning numbers
                 for (int k = 0; k < winning.length; k++) {
                     for (int n = 0; n < yours.length; n++) {
                         if (winning[k] == yours[n]) {
                             sum += 1;
-                            System.out.println(sum);
-                            System.out.println("Match: " + yours[n] + " : " + winning[k]);
                         }
                     }
                 }
-
-                match += sum ^ 2;
-                System.out.println("m: " + match);
-
+                // counting result
+                match += Math.pow(2, sum-1);
             }
-            System.out.println();
-            System.out.println(match);
+            System.out.println("Result: " + match);
 
         } catch (IOException e) {
 
