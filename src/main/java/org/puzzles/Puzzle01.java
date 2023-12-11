@@ -1,6 +1,5 @@
 package org.puzzles;
 
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,7 +8,7 @@ import java.util.List;
 import static java.lang.Character.isDigit;
 
 public class Puzzle01 {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         try {
             List<String> lines = Files.readAllLines(Paths.get("/home/slanja/IdeaProjects/AoC2023.java/src/main/java/org/puzzles/inputPuzzle01.txt"));
 
@@ -22,47 +21,48 @@ public class Puzzle01 {
                 int firstIndex = 999;
 
                 // replacing words with numbers
-                if (line.contains("one") && firstIndex > line.indexOf(String.valueOf(line.contains("one")))) {
+                if (line.contains("one") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("one")))+1) {
                     first = 1;
                     firstIndex = line.indexOf("one");
                 }
-                if (line.contains("two") && firstIndex > line.indexOf(String.valueOf(line.contains("two")))) {
+                if (line.contains("two") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("two")))+1) {
                     first = 2;
                     firstIndex = line.indexOf("two");
                 }
-                if (line.contains("three") && firstIndex > line.indexOf(String.valueOf(line.contains("three")))) {
+                if (line.contains("three") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("three")))+1) {
                     first = 3;
                     firstIndex = line.indexOf("three");
                 }
-                if (line.contains("four") && firstIndex > line.indexOf(String.valueOf(line.contains("four")))) {
+                if (line.contains("four") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("four")))+1) {
                     first = 4;
                     firstIndex = line.indexOf("four");
                 }
-                if (line.contains("five") && firstIndex > line.indexOf(String.valueOf(line.contains("five")))) {
+                if (line.contains("five") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("five")))+1) {
                     first = 5;
                     firstIndex = line.indexOf("five");
                 }
-                if (line.contains("six") && firstIndex > line.indexOf(String.valueOf(line.contains("six")))) {
+                if (line.contains("six") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("six")))+1) {
                     first = 6;
                     firstIndex = line.indexOf("six");
                 }
-                if (line.contains("seven") && firstIndex > line.indexOf(String.valueOf(line.contains("seven")))) {
+                if (line.contains("seven") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("seven")))+1) {
                     first = 7;
                     firstIndex = line.indexOf("seven");
                 }
-                if (line.contains("eight") && firstIndex > line.indexOf(String.valueOf(line.contains("eight")))) {
+                if (line.contains("eight") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("eight")))+1) {
                     first = 8;
                     firstIndex = line.indexOf("eight");
                 }
-                if (line.contains("nine") && firstIndex > line.indexOf(String.valueOf(line.contains("nine")))) {
+                if (line.contains("nine") && firstIndex+1 > line.indexOf(String.valueOf(line.contains("nine")))+1) {
                     first = 9;
                     firstIndex = line.indexOf("nine");
                 }
+                System.out.println(firstIndex);
 
                 // checking number from start
                 for (int f = 0; f < line.length(); f++) {
                     // checking if current character is number
-                    if (isDigit(line.charAt(f)) && firstIndex > line.indexOf(line.charAt(f))) {
+                    if (isDigit(line.charAt(f)) && firstIndex > line.indexOf(String.valueOf(isDigit(line.charAt(f))))) {
                         // System.out.println(line.charAt(f));
                         first = Integer.parseInt(String.valueOf(line.charAt(f)));
                         break;
@@ -108,6 +108,7 @@ public class Puzzle01 {
                     last = 9;
                     lastIndex = line.indexOf("nine");
                 }
+                System.out.println(lastIndex);
 
                 // checking number from end
                 for (int l = line.length() - 1; l > 0; l--) {
