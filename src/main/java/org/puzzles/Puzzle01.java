@@ -15,10 +15,10 @@ public class Puzzle01 {
             List<String> lines = Files.readAllLines(Paths.get("/home/slanja/IdeaProjects/AoC2023.java/src/main/java/org/puzzles/inputPuzzle01.txt"));
 
             int sum = 0;
+            String newline = "";
 
             // creating hash map
             HashMap<String, Integer> numberInstance = new HashMap<>();
-
             numberInstance.put("one", 1);
             numberInstance.put("two", 2);
             numberInstance.put("three", 3);
@@ -29,13 +29,28 @@ public class Puzzle01 {
             numberInstance.put("eight", 8);
             numberInstance.put("nine", 9);
 
+            HashMap<String, Integer> numberMulti = new HashMap<>();
+            numberMulti.put("oneight", 18);
+            numberMulti.put("twone", 21);
+            numberMulti.put("threeight", 38);
+            numberMulti.put("fiveight", 58);
+            numberMulti.put("sevenine", 79);
+            numberMulti.put("eightwo", 82);
+            numberMulti.put("eighthree", 83);
+            numberMulti.put("nineight", 98);
+
+
             for (String line : lines) {
 
                 // replacing words with numbers using hash map
+                for (Map.Entry<String, Integer> entry : numberMulti.entrySet()) {
+                    line = line.replace(entry.getKey(), String.valueOf(entry.getValue()));
+                }
+
                 for (Map.Entry<String, Integer> entry : numberInstance.entrySet()) {
                     line = line.replace(entry.getKey(), String.valueOf(entry.getValue()));
                 }
-                System.out.println(line);
+
 
                 int first = 0;
 
@@ -52,7 +67,7 @@ public class Puzzle01 {
                 int last = 0;
 
                 // checking number from end
-                for (int l = line.length() - 1; l > 0; l--) {
+                for (int l = line.length()-1; l >= 0; l--) {
                     // checking if current character is number
                     if (isDigit(line.charAt(l))) {
                         // System.out.println(line.charAt(l));
@@ -60,12 +75,6 @@ public class Puzzle01 {
                         break;
                     }
                 }
-
-                // combining first and last number to one string
-                System.out.println();
-                System.out.println("First: " + first);
-                System.out.println("Last: " + last);
-                System.out.println();
 
                 int result = first * 10 + last;
                 sum += result;
