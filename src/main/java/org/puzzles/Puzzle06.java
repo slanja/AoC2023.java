@@ -12,37 +12,35 @@ public class Puzzle06 {
         String[] split;
         int speed = 0;
         boolean timeFull = false;
-        int result = 1;
+        long result = 1;
 
-        int[] time = new int[4];
-        int[] distance = new int[4];
+        long time = 0;
+        long distance = 0;
 
         for (String line : lines) {
 
             // removing unnesecarry spaces and spliting whole file to one array
-            split = line.trim().replaceAll(" +", " ").split(" ");
+            split = line.trim().replaceAll(" +", "").split(":");
 
             if (timeFull == false) {
-                time = new int[]{Integer.parseInt(split[1]), Integer.parseInt(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4])};
+                time = Long.parseLong(split[1]);
                 timeFull = true;
             } else {
-                distance = new int[]{Integer.parseInt(split[1]), Integer.parseInt(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4])};
+                distance = Long.parseLong(split[1]);
             }
 
         }
+        int sum = 0;
+        for (int a = 0; a < time+1; a++) {
+            speed = a;
+            long tr = (time - a) * speed;
 
-        for (int i = 0; i < 4; i++) {
-            int sum = 0;
-            for (int a = 0; a < time[i]+1; a++) {
-                speed = a;
-                int tr = (time[i] - a) * speed;
-
-                if (tr > distance[i]) {
+            if (tr > distance) {
                     sum += 1;
-                }
             }
-            result *= sum;
         }
+
+        result = sum;
         System.out.println("Result: " + result);
 
             // vezmu rychlost tu odečtu od celkového času a potom vynásobím rychlostí, pokud bude vzdálenost větší než rekord přičtu sum
